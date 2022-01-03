@@ -65,7 +65,7 @@ all: modules
 
 # Targets for running make directly in the external module directory:
 
-IT87_CFLAGS=-DIT87_DRIVER_VERSION='\"$(DRIVER_VERSION)\"'
+IT87_CFLAGS=-DIT87_DRIVER_VERSION='\"$(DRIVER_VERSION)\"' -Wimplicit-fallthrough=3
 
 modules:
 	@$(MAKE) EXTRA_CFLAGS="$(IT87_CFLAGS)" -C $(KERNEL_BUILD) M=$(CURDIR) $@
