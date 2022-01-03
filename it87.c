@@ -1485,34 +1485,34 @@ static int get_temp_type(struct it87_data *data, int index)
 		src1 = (data->temp_src[index / 2] >> ((index % 2) * 4)) & 0x0f;
 
 		switch (data->type) {
-		case it8686:
-		case it8688:
-			if (src1 < 9)
-				type = temp_types_8686[index][src1];
-			break;
-		case it8625:
-			if (index < 3)
-				break;
-		case it8655:
-		case it8665:
-			if (src1 < 3) {
-				index = src1;
-				break;
-			}
-			src2 = data->temp_src[3];
-			switch (src1) {
-			case 3:
-				type = (src2 & BIT(index)) ? 6 : 5;
-				break;
-			case 4 ... 8:
-				type = (src2 & BIT(index)) ? 4 : 6;
-				break;
-			case 9:
-				type = (src2 & BIT(index)) ? 5 : 0;
-				break;
-			default:
-				break;
-			}
+		  case it8686:
+		  case it8688:
+			  if (src1 < 9)
+				  type = temp_types_8686[index][src1];
+			  break;
+		  case it8625:
+			  if (index < 3)
+				  break;
+		  case it8655:
+		  case it8665:
+			  if (src1 < 3) {
+				  index = src1;
+			    break;
+        }
+    		src2 = data->temp_src[3];
+		    switch (src1) {
+        	case 3:
+        		type = (src2 & BIT(index)) ? 6 : 5;
+			    	break;
+    			case 4 ... 8:
+		    		type = (src2 & BIT(index)) ? 4 : 6;
+		   	  	break;
+		    	case 9:
+		    		type = (src2 & BIT(index)) ? 5 : 0;
+		      	break;
+		    	default:
+		    		break;
+		  	}
 			return type;
 		default:
 			return 0;
